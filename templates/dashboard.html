@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+</head>
+<body>
+    <div style="color: red; margin: 5px; text-align: center;">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <b>{{ message }}</b>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+    <h2>Welcome to your Dashboard, {{profile.username}}</h2>
+    <p>Your account balance is &#8358;{{profile.balance}}</p>
+    <a href="/logout"><button>Logout</button></a> 
+
+    <main>
+            <section class="py-5 text-center container">
+                <div class="row py-lg-5">
+                    <div class="col-lg-6 col-md-8 mx-auto">
+                        <h1 class="fw-light">Welcome to Flask Store</h1>
+                        {% if session['username'] %}
+                        <p class="lead text-muted">Logged in as {{ session['username'] }}</p>
+                        <p>
+                            <a href="/add-new-product" class="btn btn-secondary my-2">Add product</a>
+                            <a href="/logout" class="btn btn-danger my-2">Logout</a>
+                        </p>
+                        {% endif %}
+                    </div>
+                </div>
+            </section>
+        
+            <div class="album py-5 bg-light">
+                <div class="container">
+        
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        
+                    {% for item in products %}
+                        <div class="col">
+                            <div class="card shadow-sm">
+                        
+                                <div class="card-body">
+                                    <p class="card-text mb-0">{{item.title}}</p>
+                                    <p class="card-text" style="margin-top: 0">&#8358; {{ item.price }}</p>
+                                    <img src="/uploads/{{item.image}}" style="height:100px;"> <br>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <a href="/edit/{{ item.id }}" class="btn btn-sm btn-secondary">Edit</button>
+                                            <a href="/delete/{{ item.id }}" type="button" class="btn btn-sm btn-danger">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                     {% endfor %}
+                    </div>
+                </div>
+            </div>
+        
+        </main>
+</body>
+</html>

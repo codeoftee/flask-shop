@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Welcome to flask shop
+        </title>
+    </head>
+
+    <body>
+        <h1>Flask Shop</h1>
+        <div style="color: red; margin: 5px; text-align: center;">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <b>{{ message }}</b>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+        <p>This is a flask template.</p>
+        {% if profile %}
+            <h4>
+                Welcome {{profile.username}} <br/>
+                your email address is {{profile.email}} <br/>
+                Your password hash is {{profile.password_hash}} <br/>
+                You join on {{profile.created}}
+                <br/>
+                <a href="/dashboard">Dashboard</a><br/><br/>
+                <a href="/logout">Log me out</a>
+            </h4>
+        {% else %}
+            <ul style="list-style-type: none;">
+                <li><a href="/login">Login</a></li>
+            
+                <li><a href="/sign-up">Sign Up</a></li>
+            </ul>
+        {% endif %}
+    </body>
+</html>

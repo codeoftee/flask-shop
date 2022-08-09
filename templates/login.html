@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Welcome to flask shop
+        </title>
+    </head>
+
+    <body>
+        <h1>Login to flask shop</h1>
+        <div style="color: red; margin: 5px; text-align: center;">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <b>{{ message }}</b>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+        <form method="post" action="/login">
+            <input type="email" name="email" placeholder="Enter email">
+            <br/>
+            <input type="password" name="password" placeholder="enter password">
+            <br/> <br/>
+            <input type="submit" value="Submit">
+        </form>
+
+        <br/>
+        <br/>
+        <p>Don't have an account? <a href="/sign-up">Sign</a></p>
