@@ -10,6 +10,7 @@ class User(db.Model):
     password_hash = db.Column(db.String(200))
     created = db.Column(db.DateTime, default=datetime.now())
     balance = db.Column(db.Integer, default=0)
+    role = db.Column(db.String(10)) # user // admin
 
     def __repr__(self) -> str:
         return "<Store User: {}>".format(self.username)
@@ -22,6 +23,7 @@ class Product(db.Model):
     category = db.Column(db.String(50))
     description = db.Column(db.TEXT)
     image = db.Column(db.String)
+    
 
     def __repr__(self):
         return "<Product {}".format(self.title)
